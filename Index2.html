@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Por uma Outra Globalização — Milton Santos</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f2f2f2;
+            color: #222;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 35px;
+        }
+
+        p {
+            font-size: 18px;
+            text-align: justify;
+            margin-bottom: 25px;
+        }
+
+        .controles {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+            padding: 13px 22px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #222;
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        #status {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                padding: 15px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+
+            p {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="controles">
+            <button onclick="iniciarLeitura()">🔊 Ouvir texto</button>
+            <button onclick="pararLeitura()">⏹ Parar</button>
+        </div>
+
+        <div id="status">
+            Clique em "Ouvir texto" para começar.
+        </div>
+
+        <h1>
+            POR UMA OUTRA GLOBALIZAÇÃO
+        </h1>
+
+        <p>
+            Ao se aproximar o final do século XX, o mundo assistiu a uma aceleração sem precedentes nos fluxos de informação, mercadorias e capitais. Vendia-se a promessa de que o planeta havia se tornado uma "aldeia global", onde as fronteiras desapareceriam e a tecnologia traria progresso e integração universal. No entanto, o geógrafo brasileiro Milton Santos olhou para esse cenário com um rigor crítico ímpar, desmistificando o otimismo ingênuo do discurso hegemônico. Para ele, o fim do milênio foi marcado pela consolidação do "meio técnico-científico-informacional", uma nova etapa do espaço geográfico em que a ciência, a técnica e a informação se uniram para reconfigurar o território. Essa estrutura permitiu a circulação instantânea de capitais e o controle da economia por grandes corporações, mas, longe de democratizar o acesso ao bem-estar, aprofundou imensamente os abismos sociais entre os países do Norte e do Sul Global.
+        </p>
+
+        <p>
+            Em sua obra emblemática <em>Por uma Outra Globalização</em>, publicada na virada do milênio, Milton Santos nos convida a enxergar esse fenômeno através de três dimensões fundamentais: a globalização como fábula, como perversidade e como possibilidade. A primeira dimensão representa a ilusão construída pelo mercado e pela mídia massificada — a ideia de que o consumo é acessível a todos e que a informação circula de forma livre e igualitária. A realidade concreta, porém, revela a segunda dimensão: a perversidade. No cotidiano das populações periféricas, a globalização se traduz no aumento da pobreza, no desemprego estrutural, na precarização do trabalho, no avanço da fome e na perda das identidades locais diante de uma cultura de consumo padronizada e individualista.
+        </p>
+
+    </div>
+
+</div>
+
+<script>
+
+const texto = `
+Ao se aproximar o final do século XX, o mundo assistiu a uma aceleração sem precedentes nos fluxos de informação, mercadorias e capitais.
+
+Vendia-se a promessa de que o planeta havia se tornado uma "aldeia global", onde as fronteiras desapareceriam e a tecnologia traria progresso e integração universal.
+
+No entanto, o geógrafo brasileiro Milton Santos olhou para esse cenário com um rigor crítico ímpar, desmistificando o otimismo ingênuo do discurso hegemônico.
+
+Para ele, o fim do milênio foi marcado pela consolidação do "meio técnico-científico-informacional", uma nova etapa do espaço geográfico em que a ciência, a técnica e a informação se uniram para reconfigurar o território.
+
+Essa estrutura permitiu a circulação instantânea de capitais e o controle da economia por grandes corporações, mas, longe de democratizar o acesso ao bem-estar, aprofundou imensamente os abismos sociais entre os países do Norte e do Sul Global.
+
+Em sua obra emblemática Por uma Outra Globalização, publicada na virada do milênio, Milton Santos nos convida a enxergar esse fenômeno através de três dimensões fundamentais: a globalização como fábula, como perversidade e como possibilidade.
+
+A primeira dimensão representa a ilusão construída pelo mercado e pela mídia massificada — a ideia de que o consumo é acessível a todos e que a informação circula de forma livre e igualitária.
+
+A realidade concreta, porém, revela a segunda dimensão: a perversidade.
+
+No cotidiano das populações periféricas, a globalização se traduz no aumento da pobreza, no desemprego estrutural, na precarização do trabalho, no avanço da fome e na perda das identidades locais diante de uma cultura de consumo padronizada e individualista.
+`;
+
+function iniciarLeitura() {
+
+    if (!window.speechSynthesis) {
+        document.getElementById("status").textContent =
+            "Seu navegador não suporta leitura de texto.";
+        return;
+    }
+
+    speechSynthesis.cancel();
+
+    const fala = new SpeechSynthesisUtterance(texto);
+
+    fala.lang = "pt-BR";
+    fala.rate = 0.88;
+    fala.pitch = 1;
+
+    const vozes = speechSynthesis.getVoices();
+
+    let voz = vozes.find(function(v) {
+        return v.lang === "pt-BR";
+    });
+
+    if (!voz) {
+        voz = vozes.find(function(v) {
+            return v.lang.toLowerCase().startsWith("pt");
+        });
+    }
+
+    if (voz) {
+        fala.voice = voz;
+    }
+
+    fala.onstart = function() {
+        document.getElementById("status").textContent =
+            "🔊 Leitura em andamento...";
+    };
+
+    fala.onend = function() {
+        document.getElementById("status").textContent =
+            "✅ Leitura concluída.";
+    };
+
+    fala.onerror = function() {
+        document.getElementById("status").textContent =
+            "⚠️ Erro ao iniciar a leitura.";
+    };
+
+    speechSynthesis.speak(fala);
+}
+
+function pararLeitura() {
+
+    if (window.speechSynthesis) {
+        speechSynthesis.cancel();
+    }
+
+    document.getElementById("status").textContent =
+        "⏹ Leitura interrompida.";
+}
+
+</script>
+
+</body>
+</html>
